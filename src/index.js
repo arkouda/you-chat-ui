@@ -14,7 +14,6 @@ const CoreApp = () => (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={LoginPage}></Route>
-
                 <Route path="/signin" component={SignIn}></Route>
                 <Route path="/signup" component={SignUp}></Route>
                 <Route path="/chat" component={Chat}></Route>

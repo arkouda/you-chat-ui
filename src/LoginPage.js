@@ -12,7 +12,7 @@ class LoginPage extends React.Component {
 
     toggleLoginPage = () => {
         this.setState({ signUpFlag: !(this.state.signUpFlag) });
-        // this.props.history.push('/chat');
+        console.log('toggled');
     }
 
     render = () => {

@@ -4,11 +4,16 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "internal-ip": "^4.3.0",
+    "ip": "^1.1.5",
+    "public-ip": "^3.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
-    "react-toastify": "^5.1.0"
+    "react-toastify": "^5.1.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

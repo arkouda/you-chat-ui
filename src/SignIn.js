@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { toast } from 'react-toastify';
+import { getIP } from './Helper';
 
 
 const styles = theme => ({
@@ -46,7 +47,8 @@ function SignIn(props) {
   const { classes } = props;
   const toggleCallback = props.toggle;
   const history = props.history;
-  const apiURL = "http://localhost:3001/auth/login/"
+  var apiURL = "http://" + getIP() + ":3001/auth/login/";
+
 
   var queryParams = {};
 
@@ -63,10 +65,15 @@ function SignIn(props) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(queryParams)
-    }).then(response => {
-      if (response.status === 200 || response.status === 201) {
+    }).then(async response => {
+      let content = await response.json();
+      if (content.status === 201 || content.status === 200) {
         toast("Logged In Successfully!");
-        props.history.push('/chat');
+        props.history.push({
+          pathname: '/chat',
+          loginInfo: content,
+          history: history
+        });
       } else {
         toast('Username/Password incorrect');
       }
@@ -94,6 +101,7 @@ function SignIn(props) {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {/* eslint-disable-next-line */}
             <Typography><a onClick={toggleCallback}>New User? Sign Up Here</a></Typography>
             <Button
               fullWidth

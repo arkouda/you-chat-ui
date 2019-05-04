@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { toast } from 'react-toastify';
-import { statify } from './Helper';
+import { statify, getIP } from './Helper';
 
 const styles = theme => ({
     main: {
@@ -45,13 +45,16 @@ class SignUp extends React.Component {
         super(props);
         this.state = {
             classes: this.props.classes,
-            toggleCallback: this.props.togggle,
-            apiURL: "http://localhost:3001/auth/register/",
+            toggleCallback: this.props.toggle,
+            apiURL: '',
             queryParams: {}
         }
     }
 
-    var = {};
+    componentWillMount = () => {
+        let apiURL = "http://" + getIP() + ":3001/auth/register/"
+        this.setState({ apiURL });
+    }
 
     handleChange = (event) => {
         const name = event.currentTarget.name;
@@ -102,6 +105,7 @@ class SignUp extends React.Component {
                                 <InputLabel htmlFor="password">Password</InputLabel>
                                 <Input name="password" type="password" id="password" autoComplete="current-password" onChange={this.handleChange} />
                             </FormControl>
+                            {/* eslint-disable-next-line */}
                             <Typography><a onClick={this.state.toggleCallback}>Sign In Instead? Click here</a></Typography>
                             <Button
                                 fullWidth

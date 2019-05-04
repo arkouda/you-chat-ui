@@ -5,3 +5,12 @@ export var statify = (newState, state) => {
     }
     return newState;
 }
+// const internalIp = require('internal-ip');
+// const publicIp = require('public-ip');
+// var ip = require('ip');
+
+export var getIP = () => {
+    // let ipPromise = await internalIp.v4();
+    // return ipPromise.toString();
+    return window.location.hostname;
+}
