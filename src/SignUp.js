@@ -76,7 +76,11 @@ class SignUp extends React.Component {
         }).then(response => {
             if (response.status === 200 || response.status === 201) {
                 toast("User Succesfully Created.\r\nConfirm Email and Sign In");
-                this.props.history.push('/signin');
+                this.state.toggleCallback();
+                // this.props.history.push({
+                //     pathname: '/signin',
+                //     toggle: this.state.toggleCallback
+                // });
             } else {
                 toast(response.statusText);
             }

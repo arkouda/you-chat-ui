@@ -45,7 +45,7 @@ const styles = theme => ({
 
 function SignIn(props) {
   const { classes } = props;
-  const toggleCallback = props.toggle;
+  const toggleCallback = props.toggle ? props.toggle :  props.location.toggle;
   const history = props.history;
   var apiURL = "http://" + getIP() + ":3001/auth/login/";
 
@@ -53,6 +53,7 @@ function SignIn(props) {
   var queryParams = {};
 
   var handleChange = (event) => {
+    console.log(props);
     const name = event.currentTarget.name;
     const value = event.currentTarget.value;
     queryParams[name] = value;
