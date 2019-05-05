@@ -48,19 +48,28 @@ class Chat extends React.Component {
             classes: this.props.classes,
             message: '',
             messageHistory: [],
+            usersOnline: [],
             loginInfo: this.props.location.loginInfo,
 
         };
     }
 
     componentWillMount = () => {
-        if(!this.state.loginInfo) {
+        if (!this.state.loginInfo) {
             toast("Sign In First!!");
             this.props.history.push('/signin');
         }
         const socket = io.connect('http://' + getIP() + ':3001');
         this.setState({ socket }, () => {
             console.log('socket initialized!');
+            this.state.socket.emit('addUserOnline', { username: this.state.loginInfo.username });
+            this.state.socket.on('addUserOnline', async (data) => {
+                let newList = this.state.usersOnline;
+                newList.push(data.newUser);
+                console.log(data);
+                await this.setState({ usersOnline: newList });
+                console.log(this.state.usersOnline); 
+            });
             this.state.socket.on('newMessage', async (data) => {
                 let messageH = this.state.messageHistory;
                 let newMessage = {

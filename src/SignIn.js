@@ -53,7 +53,7 @@ function SignIn(props) {
   var queryParams = {};
 
   var handleChange = (event) => {
-    console.log(props);
+    // console.log(props);
     const name = event.currentTarget.name;
     const value = event.currentTarget.value;
     queryParams[name] = value;
